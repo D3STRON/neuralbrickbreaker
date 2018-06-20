@@ -1,8 +1,8 @@
 class Brick{
     constructor(x,y)
     {
-        this.length=50
-        this.bredth= 50
+        this.length=25
+        this.bredth= 25
         this.x = x
         this.y = y
     }
