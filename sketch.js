@@ -1,7 +1,8 @@
-const TOTAL = 10
+const TOTAL = 500
 let ledges = []
 let brick = []
 let hit_ledge =[]
+let savedLedges = []
 let ball
 let no_of_brickrows=8
 let no_of_brickcols=16
@@ -65,14 +66,20 @@ function draw()
         if(hit_ledge[i]==0)
         {
             hit_ledge.splice(i,1)
+            savedLedges.push(ledges[i])
             ledges.splice(i,1)
         }
         else{
+            ledges[i].score+=1
             ledges[i].think(ball)
             ledges[i].show()
         }
     }
-
+    if(hit_ledge.length===0)
+    {   
+        nextGeneration()
+        renew()
+    }
     ball.update()
     ball.show()
 }
@@ -86,10 +93,6 @@ function renew()
         {
             brick[j][i]=new Brick(i*brick_side,j*brick_side)
         }
-    }
-    for(let i=0;i<TOTAL;i++)
-    {
-        ledges[i]= new Ledge()
     }
     ball = new Ball()
 }

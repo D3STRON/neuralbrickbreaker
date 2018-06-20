@@ -1,11 +1,24 @@
 class Ledge{
-     constructor(){
+     constructor(brain){
          this.x=150
          this.y=500
          this.length=100
          this.bredth=20
          this.velocity= 30
-         this.brain = new NeuralNetwork(5,5,3)
+         this.fitness = 0
+         this.score = 0
+         if(brain)
+         {
+             this.brain = brain.copy()
+         }
+         else
+         {
+            this.brain = new NeuralNetwork(5,5,3)
+         }
+     }
+     mutate()
+     {
+        this.brain.mutate(0.1)
      }
      show()
      {
