@@ -44,38 +44,36 @@ function draw()
             }
         }
     }
-    
+    let v_change= false
     for(let i=0;i<ledges.length;i++)
     {
         if(ball.y+ball.rad>=ledges[i].y)
         {
             if(ledges[i].hit(ball)==1)
             {
-                ball.velocity_y *=-1
+                //console.log('true')
+                v_change=true
                 ball.velocity_x = random(ball.list)*(ball.velocity_x/Math.abs(ball.velocity_x))
             }
             else if(ball.x+ball.rad<ledges[i].x || ball.x-ball.rad>ledges[i].x+ledges[i].length)
             {
-                hit_ledge[i]=0
+                savedLedges.push(ledges[i])
+                ledges.splice(i,1)
+                i-=1
             }
         }
-    }
-    
-    for(let i=0;i<hit_ledge.length;i++)
-    {
-        if(hit_ledge[i]==0)
+        if(ledges[i])
         {
-            hit_ledge.splice(i,1)
-            savedLedges.push(ledges[i])
-            ledges.splice(i,1)
-        }
-        else{
             ledges[i].score+=1
             ledges[i].think(ball)
             ledges[i].show()
         }
     }
-    if(hit_ledge.length===0)
+    if(v_change)
+    {
+        ball.velocity_y *=-1
+    }
+    if(ledges.length===0 && ball.y+ball.rad>=height)
     {   
         nextGeneration()
         renew()

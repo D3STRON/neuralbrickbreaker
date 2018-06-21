@@ -4,7 +4,6 @@ function nextGeneration()
     for(let i=0;i<TOTAL;i++)
     {
         ledges[i]= pickOne()
-        hit_ledge.push(1)
     }
     savedLedges=[]
 }

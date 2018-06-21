@@ -2,9 +2,9 @@ class Ledge{
      constructor(brain){
          this.x=150
          this.y=500
-         this.length=100
+         this.length=40
          this.bredth=20
-         this.velocity= 30
+         this.velocity= 20
          this.fitness = 0
          this.score = 0
          if(brain)
@@ -13,7 +13,7 @@ class Ledge{
          }
          else
          {
-            this.brain = new NeuralNetwork(5,5,3)
+            this.brain = new NeuralNetwork(6,6,3)
          }
      }
      mutate()
@@ -33,6 +33,7 @@ class Ledge{
         inputs[2] = ball.velocity_x
         inputs[3] = ball.velocity_y
         inputs[4] = this.x
+        inputs[5] = this.x+this.length
         let outputs= this.brain.feedforward(inputs)
         if(outputs.data[0]>outputs.data[1] && outputs.data[0]>outputs.data[2])
         {
@@ -42,11 +43,15 @@ class Ledge{
         {
             this.move(1)
         }
+        else if(outputs.data[1]>outputs.data[0] && outputs.data[1]>outputs.data[2])
+        {
+            this.move(0)
+        }
      }
 
      hit(ball)
      {
-         if(ball.x+ball.rad>this.x && ball.x-ball.rad<this.x+this.length && ball.velocity_y>0)
+        if(ball.x+ball.rad>this.x && ball.x-ball.rad<this.x+this.length && ball.velocity_y>0)
         {
             if(ball.y+ball.rad>=this.y && ball.y<this.y)
             {

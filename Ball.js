@@ -3,7 +3,7 @@ class Ball{
     {
         this.x = 200
         this.y = 400
-        this.list=[2,3,4,5]
+        this.list=[5,6,7]
         this.direction=[-1,1]
         this.velocity_x = random(this.list)*random(this.direction)
         this.velocity_y = -4
