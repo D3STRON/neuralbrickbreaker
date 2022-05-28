@@ -13,7 +13,7 @@ class Ledge{
          }
          else
          {
-            this.brain = new NeuralNetwork(6,6,3)
+            this.brain = new NeuralNetwork([6,6,3])
          }
      }
      mutate()
